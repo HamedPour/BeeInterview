@@ -10,6 +10,16 @@ namespace BeeInterview
     {
         static void Main(string[] args)
         {
+
+            Queen q = new Queen();
+
+            q.Damage(30);
+            Console.WriteLine(q.getHealth());
+            Console.WriteLine(q.IsAlive);
+            q.Damage(10);
+            Console.WriteLine(q.IsAlive);
+
+            Console.ReadLine();
         }
     }
 }
