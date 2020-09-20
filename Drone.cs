@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeeInterview
+﻿namespace BeeInterview
 {
     class Drone: Bee
     {
-        public override float DamageLimit { get; set; } = 50;
+        public override void Damage(float percentageToReduce)
+        {
+            TakeDamage(percentageToReduce);
+            // Drone below 50%;
+            if (Health < (MaxHealth * 0.5))
+            {
+                PronounceDead();
+            }
+        }
     }
 }

@@ -13,18 +13,14 @@ namespace BeeInterview
 
             Queen q = new Queen();
 
-            Console.WriteLine(q.getHealth());
-            q.Damage(30);
-            Console.WriteLine(q.getHealth());
-            q.Damage(10);
-            Console.WriteLine(q.getHealth());
-            q.Damage(40);
-            Console.WriteLine(q.getHealth());
-            q.Damage(60);
-            Console.WriteLine(q.getHealth());
-            q.Damage(60);
-            Console.WriteLine(q.getHealth());
-
+            q.TakeDamage(10);
+            Console.WriteLine(q.Health);
+            q.TakeDamage(10);
+            Console.WriteLine(q.Health);
+            q.TakeDamage(10);
+            Console.WriteLine(q.Health);
+            q.TakeDamage(10);
+            Console.WriteLine(q.Health);
 
             Console.ReadLine();
         }

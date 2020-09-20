@@ -1,48 +1,54 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BeeInterview
 {
+    /// <summary>
+    /// First, many thanks to Bizz for helping me with this!
+    /// </summary>
     abstract class Bee
     {
-        private float Health { get; set; }
-        public bool Dead { get; set; }
-        public virtual float DamageLimit { get; set; }
-        public Bee()
+        public float MaxHealth { get; } = 100;
+        public float Health { get; private set; }
+        public bool Dead { get; private set; }
+        protected Bee()
         {
-            Health = 100;
+            Health = MaxHealth;
             Dead = false;
         }
 
-        public void Damage(float amount)
+        /// <summary>
+        /// Method takes single int param between 0 and 100.
+        /// </summary>
+        /// <param name="percentageToReduce"></param>
+        public abstract void Damage(float percentageToReduce);
+
+        /// <summary>
+        /// "Method that preforms the resuable logic of damaging a bee" - Bizz 2020
+        /// </summary>
+        /// <param name="percentageToReduce"></param>
+        public void TakeDamage(float percentageToReduce)
         {
-            float percetage = amount / 100;
-            // if the bee is dead don't bother with anything else and just return.
+
+            // if the bee is dead no further health deductions should occur. 
             if (Dead) return;
-            // if the argument is not in range of 0 100, tell them and return.
-            if (amount > 100 || amount < 0)
+
+            // param should only be between 0 to 100
+            if (percentageToReduce > 100 || percentageToReduce < 0)
             {
                 Console.WriteLine("Damage must be between 0 and 100.");
                 return;
             }
-            // if the bee has reached it's damage limit set Dead to true, return.
-            if (Health <= DamageLimit)
-            {
-                Dead = true;
-                Console.WriteLine("The Bee is Dead!");
-                return;
-            }
-            // if you've gotten this fare apply the damage amount to bee's health.
-            Health *= percetage;
+
+            /// Problem: The Health of the Beeis to be reduced by that percentage of ...
+            /// ... their current health.
+            /// I initially got this wrong and thanks to Bizz realised that it's all about ...
+            /// ... the precision!
+            Health -= (Health * (percentageToReduce / 100f));
         }
 
-        public float getHealth()
+        public void PronounceDead()
         {
-            return Health;
+            Dead = true;
         }
 
     }
